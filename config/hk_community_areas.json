@@ -1,0 +1,141 @@
+{
+  "version": "1.0",
+  "description": "HK BNO community concentration areas by postcode district",
+  "areas": [
+    {
+      "region": "Manchester",
+      "county": "GREATER MANCHESTER",
+      "district": "TRAFFORD",
+      "postcodes": ["WA14", "WA15"],
+      "town": "Altrincham",
+      "hk_concentration": "high",
+      "notes": "Most popular school catchment area"
+    },
+    {
+      "region": "Manchester",
+      "county": "GREATER MANCHESTER",
+      "district": "TRAFFORD",
+      "postcodes": ["M33"],
+      "town": "Sale",
+      "hk_concentration": "high",
+      "notes": "Adjacent to Altrincham, core HK area"
+    },
+    {
+      "region": "Manchester",
+      "county": "GREATER MANCHESTER",
+      "district": "SALFORD",
+      "postcodes": ["M28"],
+      "town": "Worsley",
+      "hk_concentration": "medium",
+      "notes": "Traditional residential, popular with middle-class families"
+    },
+    {
+      "region": "Manchester",
+      "county": "GREATER MANCHESTER",
+      "district": "BURY",
+      "postcodes": ["M45"],
+      "town": "Whitefield",
+      "hk_concentration": "medium",
+      "notes": "Popular choice north of Manchester"
+    },
+    {
+      "region": "Manchester",
+      "county": "GREATER MANCHESTER",
+      "district": "MANCHESTER",
+      "postcodes": ["M20"],
+      "town": "Didsbury",
+      "hk_concentration": "medium",
+      "notes": "Popular with HK professionals, vibrant village atmosphere"
+    },
+    {
+      "region": "London",
+      "county": "GREATER LONDON",
+      "district": "SUTTON",
+      "postcodes": ["SM1", "SM2", "SM3"],
+      "town": "Sutton",
+      "hk_concentration": "high",
+      "notes": "Hottest HK settlement, famous for Grammar Schools"
+    },
+    {
+      "region": "London",
+      "county": "GREATER LONDON",
+      "district": "KINGSTON UPON THAMES",
+      "postcodes": ["KT1", "KT2"],
+      "town": "Kingston upon Thames",
+      "hk_concentration": "high",
+      "notes": "Elegant environment, good safety, traditional HK parent choice"
+    },
+    {
+      "region": "London",
+      "county": "GREATER LONDON",
+      "district": "CROYDON",
+      "postcodes": ["CR0"],
+      "town": "Croydon",
+      "hk_concentration": "high",
+      "notes": "Good transport links, lower cost than central London"
+    },
+    {
+      "region": "London",
+      "county": "GREATER LONDON",
+      "district": "BARNET",
+      "postcodes": ["NW9"],
+      "town": "Colindale",
+      "hk_concentration": "medium",
+      "notes": "New apartments, popular with young HK couples"
+    },
+    {
+      "region": "Warrington",
+      "county": "CHESHIRE",
+      "district": "WARRINGTON",
+      "postcodes": ["WA4", "WA5"],
+      "town": "Great Sankey / Stockton Heath",
+      "hk_concentration": "medium",
+      "notes": "Between Manchester and Liverpool, quieter and cheaper"
+    },
+    {
+      "region": "Reading",
+      "county": "BERKSHIRE",
+      "district": "READING",
+      "postcodes": ["RG1", "RG2", "RG6"],
+      "town": "Reading",
+      "hk_concentration": "medium",
+      "notes": "London commuter belt, major tech employers"
+    },
+    {
+      "region": "Birmingham",
+      "county": "WEST MIDLANDS",
+      "district": "SOLIHULL",
+      "postcodes": ["B90", "B91"],
+      "town": "Solihull",
+      "hk_concentration": "high",
+      "notes": "Premium residential area, excellent schools"
+    },
+    {
+      "region": "Birmingham",
+      "county": "WEST MIDLANDS",
+      "district": "BIRMINGHAM",
+      "postcodes": ["B73", "B74"],
+      "town": "Sutton Coldfield",
+      "hk_concentration": "medium",
+      "notes": "Quality education and living environment"
+    },
+    {
+      "region": "Nottingham",
+      "county": "NOTTINGHAMSHIRE",
+      "district": "RUSHCLIFFE",
+      "postcodes": ["NG2"],
+      "town": "West Bridgford",
+      "hk_concentration": "medium",
+      "notes": "Most popular area in Nottingham, high quality of life"
+    },
+    {
+      "region": "Bristol",
+      "county": "AVON",
+      "district": "SOUTH GLOUCESTERSHIRE",
+      "postcodes": ["BS16", "BS34"],
+      "town": "Bristol North",
+      "hk_concentration": "medium",
+      "notes": "Attracts professionals, active community"
+    }
+  ]
+}
