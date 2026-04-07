@@ -71,13 +71,14 @@ def load_parquet_from_adls(container: str, blob_prefix: str) -> pd.DataFrame:
         st.error(f"Error loading data: {e}")
         return pd.DataFrame()
 
-
 @st.cache_data
 def load_geojson():
     """Load UK district GeoJSON for map visualisation."""
-    with open("data/uk_districts.geojson") as f:
+    import os
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    geojson_path = os.path.join(base_dir, "data", "uk_districts.geojson")
+    with open(geojson_path) as f:
         return json.load(f)
-
 
 # ── Sidebar ────────────────────────────────────────────────
 st.sidebar.title("🏠 UK HK Property Analysis")
