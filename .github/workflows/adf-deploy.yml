@@ -1,0 +1,41 @@
+name: ADF Pipeline Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'adf/pipelines/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy ADF Pipelines
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: |
+            {
+              "clientId": "${{ secrets.ARM_CLIENT_ID }}",
+              "clientSecret": "${{ secrets.ARM_CLIENT_SECRET }}",
+              "subscriptionId": "${{ secrets.ARM_SUBSCRIPTION_ID }}",
+              "tenantId": "${{ secrets.ARM_TENANT_ID }}"
+            }
+
+      - name: Deploy ADF Pipelines
+        run: |
+          for file in adf/pipelines/*.json; do
+            pipeline_name=$(basename "$file" .json)
+            echo "Deploying pipeline: $pipeline_name"
+            az datafactory pipeline create \
+              --factory-name "adf-ukhkprop-dev" \
+              --resource-group "rg-ukhkprop-dev" \
+              --name "$pipeline_name" \
+              --pipeline "@$file"
+          done

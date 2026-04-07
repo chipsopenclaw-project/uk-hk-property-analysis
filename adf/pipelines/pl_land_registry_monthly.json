@@ -1,0 +1,48 @@
+{
+  "name": "pl_land_registry_monthly",
+  "properties": {
+    "description": "Monthly incremental load of Land Registry price paid data",
+    "activities": [
+      {
+        "name": "CopyMonthlyCSV",
+        "type": "Copy",
+        "inputs": [
+          {
+            "referenceName": "ds_http_land_registry_csv",
+            "type": "DatasetReference",
+            "parameters": {
+              "relative_url": "pp-monthly-update.csv"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "referenceName": "ds_adls_bronze_land_registry",
+            "type": "DatasetReference",
+            "parameters": {
+              "folder": {
+                "value": "@concat('monthly/', formatDateTime(utcnow(), 'yyyy-MM'))",
+                "type": "Expression"
+              },
+              "filename": {
+                "value": "@concat('pp-', formatDateTime(utcnow(), 'yyyy-MM'), '.csv')",
+                "type": "Expression"
+              }
+            }
+          }
+        ],
+        "typeProperties": {
+          "source": {
+            "type": "HttpSource",
+            "requestTimeout": "00:10:00"
+          },
+          "sink": {
+            "type": "BlobSink"
+          },
+          "enableStaging": false
+        }
+      }
+    ],
+    "parameters": {}
+  }
+}

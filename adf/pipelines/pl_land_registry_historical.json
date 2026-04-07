@@ -1,0 +1,65 @@
+{
+  "name": "pl_land_registry_historical",
+  "properties": {
+    "description": "One-time load of Land Registry data from 2017 to current year",
+    "activities": [
+      {
+        "name": "ForEachYear",
+        "type": "ForEach",
+        "typeProperties": {
+          "items": {
+            "value": "@pipeline().parameters.years",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "name": "CopyYearlyCSV",
+              "type": "Copy",
+              "inputs": [
+                {
+                  "referenceName": "ds_http_land_registry_csv",
+                  "type": "DatasetReference",
+                  "parameters": {
+                    "relative_url": {
+                      "value": "@concat('pp-', item(), '.csv')",
+                      "type": "Expression"
+                    }
+                  }
+                }
+              ],
+              "outputs": [
+                {
+                  "referenceName": "ds_adls_bronze_land_registry",
+                  "type": "DatasetReference",
+                  "parameters": {
+                    "folder": "historical",
+                    "filename": {
+                      "value": "@concat('pp-', item(), '.csv')",
+                      "type": "Expression"
+                    }
+                  }
+                }
+              ],
+              "typeProperties": {
+                "source": {
+                  "type": "HttpSource",
+                  "requestTimeout": "00:10:00"
+                },
+                "sink": {
+                  "type": "BlobSink"
+                },
+                "enableStaging": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parameters": {
+      "years": {
+        "type": "Array",
+        "defaultValue": ["2017","2018","2019","2020","2021","2022","2023","2024"]
+      }
+    }
+  }
+}
