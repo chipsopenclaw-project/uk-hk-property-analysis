@@ -38,10 +38,21 @@ jobs:
           docker build -t acrukhkpropdev.azurecr.io/streamlit:latest .
           docker push acrukhkpropdev.azurecr.io/streamlit:latest
 
+      - name: Get ACR Credentials
+        id: acr-creds
+        run: |
+          ACR_USERNAME=$(az acr credential show --name acrukhkpropdev --query username -o tsv)
+          ACR_PASSWORD=$(az acr credential show --name acrukhkpropdev --query passwords[0].value -o tsv)
+          echo "acr_username=$ACR_USERNAME" >> $GITHUB_OUTPUT
+          echo "acr_password=$ACR_PASSWORD" >> $GITHUB_OUTPUT
+
       - name: Update Container App
         run: |
           az containerapp update \
             --name ca-ukhkprop-streamlit-dev \
             --resource-group rg-ukhkprop-dev \
             --image acrukhkpropdev.azurecr.io/streamlit:latest \
-            --set-env-vars STORAGE_ACCOUNT=stukhkpropdev
+            --set-env-vars STORAGE_ACCOUNT=stukhkpropdev \
+            --registry-server acrukhkpropdev.azurecr.io \
+            --registry-username ${{ steps.acr-creds.outputs.acr_username }} \
+            --registry-password ${{ steps.acr-creds.outputs.acr_password }}
