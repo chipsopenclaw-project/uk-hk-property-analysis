@@ -24,6 +24,10 @@ st.set_page_config(
 STORAGE_ACCOUNT = os.environ.get("STORAGE_ACCOUNT", "stukhkpropdev")
 GOLD_CONTAINER  = "gold"
 
+AZURE_CLIENT_ID     = st.secrets.get("AZURE_CLIENT_ID", "")
+AZURE_CLIENT_SECRET = st.secrets.get("AZURE_CLIENT_SECRET", "")
+AZURE_TENANT_ID     = st.secrets.get("AZURE_TENANT_ID", "")
+
 PERIOD_LABELS = {
     "P0_baseline":   "P0 Baseline (2017-2020)",
     "P1_lotr_only":  "P1 LOTR Only (Jul-Jan 2021)",
@@ -43,6 +47,12 @@ HK_CONCENTRATION_COLORS = {
 def load_parquet_from_adls(container: str, blob_prefix: str) -> pd.DataFrame:
     """Load Parquet files from ADLS Gold layer into Pandas DataFrame."""
     try:
+        from azure.identity import ClientSecretCredential
+        credential = ClientSecretCredential(
+            tenant_id=AZURE_TENANT_ID,
+            client_id=AZURE_CLIENT_ID,
+            client_secret=AZURE_CLIENT_SECRET
+        )
         account_url = f"https://{STORAGE_ACCOUNT}.dfs.core.windows.net"
         client = BlobServiceClient(account_url=account_url)
         container_client = client.get_container_client(container)
