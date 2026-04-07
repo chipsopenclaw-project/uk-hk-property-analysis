@@ -1,0 +1,38 @@
+# ── Azure Data Factory ─────────────────────────────────────
+resource "azurerm_data_factory" "main" {
+  name                = "adf-${var.project}-${var.environment}"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  tags = var.tags
+}
+
+# ── Grant ADF Managed Identity access to ADLS ─────────────
+resource "azurerm_role_assignment" "adf_storage" {
+  scope                = var.storage_account_id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = azurerm_data_factory.main.identity[0].principal_id
+}
+
+# ── Grant ADF Managed Identity access to Key Vault ────────
+resource "azurerm_key_vault_access_policy" "adf" {
+  key_vault_id = var.key_vault_id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = azurerm_data_factory.main.identity[0].principal_id
+
+  secret_permissions = ["Get", "List"]
+}
+
+# ── Linked Service: ADLS Gen2 ──────────────────────────────
+resource "azurerm_data_factory_linked_service_data_lake_storage_gen2" "adls" {
+  name                 = "ls_adls_${var.environment}"
+  data_factory_id      = azurerm_data_factory.main.id
+  url                  = "https://${var.storage_account_name}.dfs.core.windows.net"
+  use_managed_identity = true
+}
+
+data "azurerm_client_config" "current" {}
