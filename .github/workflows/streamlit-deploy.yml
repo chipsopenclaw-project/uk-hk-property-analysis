@@ -1,0 +1,47 @@
+name: Streamlit Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'streamlit/**'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy Streamlit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: |
+            {
+              "clientId": "${{ secrets.ARM_CLIENT_ID }}",
+              "clientSecret": "${{ secrets.ARM_CLIENT_SECRET }}",
+              "subscriptionId": "${{ secrets.ARM_SUBSCRIPTION_ID }}",
+              "tenantId": "${{ secrets.ARM_TENANT_ID }}"
+            }
+
+      - name: Login to ACR
+        run: |
+          az acr login --name acrukhkpropdev
+
+      - name: Build and Push Docker Image
+        run: |
+          cd streamlit
+          docker build -t acrukhkpropdev.azurecr.io/streamlit:latest .
+          docker push acrukhkpropdev.azurecr.io/streamlit:latest
+
+      - name: Update Container App
+        run: |
+          az containerapp update \
+            --name ca-ukhkprop-streamlit-dev \
+            --resource-group rg-ukhkprop-dev \
+            --image acrukhkpropdev.azurecr.io/streamlit:latest \
+            --set-env-vars STORAGE_ACCOUNT=stukhkpropdev
