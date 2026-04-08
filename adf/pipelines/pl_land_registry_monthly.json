@@ -1,7 +1,7 @@
 {
   "name": "pl_land_registry_monthly",
   "properties": {
-    "description": "Monthly incremental load of Land Registry price paid data",
+    "description": "Monthly incremental load of Land Registry price paid data, then transform to Silver and Gold",
     "activities": [
       {
         "name": "CopyMonthlyCSV",
@@ -43,6 +43,56 @@
             }
           },
           "enableStaging": false
+        }
+      },
+      {
+        "name": "BronzeToSilver",
+        "type": "SparkJob",
+        "dependsOn": [
+          {
+            "activity": "CopyMonthlyCSV",
+            "dependencyConditions": ["Succeeded"]
+          }
+        ],
+        "linkedServiceName": {
+          "referenceName": "ls_synapse_dev",
+          "type": "LinkedServiceReference"
+        },
+        "typeProperties": {
+          "sparkPool": {
+            "referenceName": "sparkpooldev",
+            "type": "BigDataPoolReference"
+          },
+          "rootPath": "config",
+          "entryFilePath": "scripts/bronze_to_silver.py",
+          "numExecutors": 3,
+          "executorSize": "Small",
+          "driverSize": "Small"
+        }
+      },
+      {
+        "name": "SilverToGold",
+        "type": "SparkJob",
+        "dependsOn": [
+          {
+            "activity": "BronzeToSilver",
+            "dependencyConditions": ["Succeeded"]
+          }
+        ],
+        "linkedServiceName": {
+          "referenceName": "ls_synapse_dev",
+          "type": "LinkedServiceReference"
+        },
+        "typeProperties": {
+          "sparkPool": {
+            "referenceName": "sparkpooldev",
+            "type": "BigDataPoolReference"
+          },
+          "rootPath": "config",
+          "entryFilePath": "scripts/silver_to_gold.py",
+          "numExecutors": 3,
+          "executorSize": "Small",
+          "driverSize": "Small"
         }
       }
     ],

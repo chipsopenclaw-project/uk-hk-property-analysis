@@ -8,6 +8,7 @@ on:
       - 'adf/pipelines/**'
       - 'adf/linked_services/**'
       - 'adf/datasets/**'
+      - 'adf/triggers/**'
   workflow_dispatch:
 
 jobs:
@@ -35,6 +36,9 @@ jobs:
 
       - name: Deploy ADF Datasets
         run: python3 scripts/deploy_adf_datasets.py
+
+      - name: Deploy ADF Triggers
+        run: python3 scripts/deploy_adf_triggers.py
 
       - name: Deploy ADF Pipelines
         run: |
