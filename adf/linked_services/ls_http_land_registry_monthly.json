@@ -1,0 +1,11 @@
+{
+  "name": "ls_http_land_registry_monthly",
+  "properties": {
+    "type": "HttpServer",
+    "typeProperties": {
+      "url": "https://price-paid-data.publicdata.landregistry.gov.uk",
+      "authenticationType": "Anonymous",
+      "enableServerCertificateValidation": true
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "ds_http_land_registry_monthly",
+  "properties": {
+    "type": "Binary",
+    "linkedServiceName": {
+      "referenceName": "ls_http_land_registry_monthly",
+      "type": "LinkedServiceReference"
+    },
+    "typeProperties": {
+      "location": {
+        "type": "HttpServerLocation",
+        "relativeUrl": "pp-monthly-update-new-version.csv"
+      }
+    }
+  }
+}

@@ -8,11 +8,8 @@
         "type": "Copy",
         "inputs": [
           {
-            "referenceName": "ds_http_land_registry_csv",
-            "type": "DatasetReference",
-            "parameters": {
-              "relative_url": "pp-monthly-update.csv"
-            }
+            "referenceName": "ds_http_land_registry_monthly",
+            "type": "DatasetReference"
           }
         ],
         "outputs": [
@@ -33,11 +30,17 @@
         ],
         "typeProperties": {
           "source": {
-            "type": "HttpSource",
-            "requestTimeout": "00:10:00"
+            "type": "BinarySource",
+            "storeSettings": {
+              "type": "HttpReadSettings",
+              "requestMethod": "GET"
+            }
           },
           "sink": {
-            "type": "BlobSink"
+            "type": "BinarySink",
+            "storeSettings": {
+              "type": "AzureBlobFSWriteSettings"
+            }
           },
           "enableStaging": false
         }
