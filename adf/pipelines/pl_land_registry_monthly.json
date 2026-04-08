@@ -47,52 +47,75 @@
       },
       {
         "name": "BronzeToSilver",
-        "type": "SparkJob",
+        "type": "WebActivity",
         "dependsOn": [
           {
             "activity": "CopyMonthlyCSV",
             "dependencyConditions": ["Succeeded"]
           }
         ],
-        "linkedServiceName": {
-          "referenceName": "ls_synapse_dev",
-          "type": "LinkedServiceReference"
-        },
         "typeProperties": {
-          "sparkPool": {
-            "referenceName": "sparkpooldev",
-            "type": "BigDataPoolReference"
+          "url": "https://syn-ukhkprop-dev.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/sparkpooldev/batches",
+          "method": "POST",
+          "authentication": {
+            "type": "MSI",
+            "resource": "https://dev.azuresynapse.net"
           },
-          "rootPath": "config",
-          "entryFilePath": "scripts/bronze_to_silver.py",
-          "numExecutors": 3,
-          "executorSize": "Small",
-          "driverSize": "Small"
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "file": "abfss://config@stukhkpropdev.dfs.core.windows.net/scripts/bronze_to_silver.py",
+            "name": "bronze_to_silver",
+            "executorMemory": "4g",
+            "executorCores": 4,
+            "numExecutors": 3,
+            "driverMemory": "4g",
+            "driverCores": 4
+          }
         }
       },
       {
-        "name": "SilverToGold",
-        "type": "SparkJob",
+        "name": "WaitForBronzeToSilver",
+        "type": "Wait",
         "dependsOn": [
           {
             "activity": "BronzeToSilver",
             "dependencyConditions": ["Succeeded"]
           }
         ],
-        "linkedServiceName": {
-          "referenceName": "ls_synapse_dev",
-          "type": "LinkedServiceReference"
-        },
         "typeProperties": {
-          "sparkPool": {
-            "referenceName": "sparkpooldev",
-            "type": "BigDataPoolReference"
+          "waitTimeInSeconds": 1800
+        }
+      },
+      {
+        "name": "SilverToGold",
+        "type": "WebActivity",
+        "dependsOn": [
+          {
+            "activity": "WaitForBronzeToSilver",
+            "dependencyConditions": ["Succeeded"]
+          }
+        ],
+        "typeProperties": {
+          "url": "https://syn-ukhkprop-dev.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/sparkpooldev/batches",
+          "method": "POST",
+          "authentication": {
+            "type": "MSI",
+            "resource": "https://dev.azuresynapse.net"
           },
-          "rootPath": "config",
-          "entryFilePath": "scripts/silver_to_gold.py",
-          "numExecutors": 3,
-          "executorSize": "Small",
-          "driverSize": "Small"
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "file": "abfss://config@stukhkpropdev.dfs.core.windows.net/scripts/silver_to_gold.py",
+            "name": "silver_to_gold",
+            "executorMemory": "4g",
+            "executorCores": 4,
+            "numExecutors": 3,
+            "driverMemory": "4g",
+            "driverCores": 4
+          }
         }
       }
     ],
