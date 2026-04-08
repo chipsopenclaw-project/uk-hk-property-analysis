@@ -188,10 +188,11 @@ with tab2:
     with col1:
         st.subheader("Price Uplift Choropleth (Plotly)")
         if not df_uplift.empty:
+            df_uplift["county_title"] = df_uplift["county"].str.title()
             fig_map = px.choropleth(
                 df_uplift,
                 geojson=geojson,
-                locations="county",
+                locations="county_title",
                 featureidkey="properties.LAD13NM",
                 color="price_uplift_pct",
                 color_continuous_scale="RdYlGn",
