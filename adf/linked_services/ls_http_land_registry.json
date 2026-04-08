@@ -3,9 +3,9 @@
   "properties": {
     "type": "HttpServer",
     "typeProperties": {
-      "url": "https://prod.publicdata.landregistry.gov.uk.s3-website-eu-west-1.amazonaws.com",
+      "url": "http://prod1.publicdata.landregistry.gov.uk.s3-website-eu-west-1.amazonaws.com",
       "authenticationType": "Anonymous",
-      "enableServerCertificateValidation": true
+      "enableServerCertificateValidation": false
     }
   }
 }
