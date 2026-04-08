@@ -186,26 +186,61 @@ with tab2:
     col1, col2 = st.columns(2)
 
     with col1:
-        st.subheader("Price Uplift Choropleth (Plotly)")
+        st.subheader("HK Community Price Uplift (Plotly)")
         if not df_uplift.empty:
-            df_uplift["county_title"] = df_uplift["county"].str.title()
-            fig_map = px.choropleth(
-                df_uplift,
-                geojson=geojson,
-                locations="county_title",
-                featureidkey="properties.LAD13NM",
-                color="price_uplift_pct",
-                color_continuous_scale="RdYlGn",
-                range_color=[-10, 30],
-                labels={"price_uplift_pct": "Price Uplift (%)"},
-                title="P0 vs P2 Price Uplift by District"
-            )
-            fig_map.update_geos(
-                fitbounds="locations",
-                visible=False
-            )
-            fig_map.update_layout(height=500)
-            st.plotly_chart(fig_map, use_container_width=True)
+            try:
+                from azure.identity import ClientSecretCredential
+                credential = ClientSecretCredential(
+                    tenant_id=AZURE_TENANT_ID,
+                    client_id=AZURE_CLIENT_ID,
+                    client_secret=AZURE_CLIENT_SECRET
+                )
+                blob_client = BlobServiceClient(
+                    account_url=f"https://{STORAGE_ACCOUNT}.blob.core.windows.net",
+                    credential=credential
+                ).get_blob_client("config", "hk_community_areas.json")
+                config_data = json.loads(blob_client.download_blob().readall())
+                areas = config_data["areas"]
+
+                # Build postcode -> lat/lon lookup
+                coord_rows = []
+                for area in areas:
+                    for pc in area["postcodes"]:
+                        coord_rows.append({
+                            "postcode_district": pc,
+                            "latitude": area["latitude"],
+                            "longitude": area["longitude"],
+                            "town": area["town"]
+                        })
+                df_coords = pd.DataFrame(coord_rows)
+
+                # Join uplift with coordinates
+                df_uplift_geo = df_uplift[df_uplift["hk_concentration"].isin(["high", "medium"])].merge(
+                    df_coords, on="postcode_district", how="inner"
+                )
+
+                if not df_uplift_geo.empty:
+                    fig_map = px.scatter_mapbox(
+                        df_uplift_geo,
+                        lat="latitude",
+                        lon="longitude",
+                        color="price_uplift_pct",
+                        size="baseline_txn_volume",
+                        hover_name="town",
+                        hover_data={"postcode_district": True, "price_uplift_pct": True, "hk_concentration": True},
+                        color_continuous_scale="RdYlGn",
+                        range_color=[-10, 30],
+                        size_max=30,
+                        zoom=5,
+                        center={"lat": 52.5, "lon": -1.5},
+                        mapbox_style="carto-positron",
+                        labels={"price_uplift_pct": "Price Uplift (%)"},
+                        title="HK Community Price Uplift P0 vs P2"
+                    )
+                    fig_map.update_layout(height=500)
+                    st.plotly_chart(fig_map, use_container_width=True)
+            except Exception as e:
+                st.warning(f"Could not load map data: {e}")
 
     with col2:
         st.subheader("HK Community Areas (Folium)")
