@@ -30,16 +30,7 @@ jobs:
             }
 
       - name: Deploy ADF Linked Services
-        run: |
-          for file in adf/linked_services/*.json; do
-            ls_name=$(basename "$file" .json)
-            echo "Deploying linked service: $ls_name"
-            az datafactory linked-service create \
-              --factory-name "adf-ukhkprop-dev" \
-              --resource-group "rg-ukhkprop-dev" \
-              --name "$ls_name" \
-              --properties "$(cat $file | python3 -c 'import json,sys; d=json.load(sys.stdin); print(json.dumps(d["properties"]))')"
-          done
+        run: python3 scripts/deploy_adf_linked_services.py
 
       - name: Deploy ADF Pipelines
         run: |
