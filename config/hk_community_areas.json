@@ -6,10 +6,23 @@
       "region": "Manchester",
       "county": "GREATER MANCHESTER",
       "district": "TRAFFORD",
-      "postcodes": ["WA14", "WA15"],
+      "postcodes": ["WA14"],
       "town": "Altrincham",
       "hk_concentration": "high",
-      "notes": "Most popular school catchment area"
+      "notes": "Most popular school catchment area",
+      "latitude": 53.3838,
+      "longitude": -2.3527
+    },
+    {
+      "region": "Manchester",
+      "county": "GREATER MANCHESTER",
+      "district": "TRAFFORD",
+      "postcodes": ["WA15"],
+      "town": "Timperley",
+      "hk_concentration": "high",
+      "notes": "Adjacent to Altrincham, core HK area",
+      "latitude": 53.3916,
+      "longitude": -2.3186
     },
     {
       "region": "Manchester",
@@ -18,7 +31,9 @@
       "postcodes": ["M33"],
       "town": "Sale",
       "hk_concentration": "high",
-      "notes": "Adjacent to Altrincham, core HK area"
+      "notes": "Adjacent to Altrincham, core HK area",
+      "latitude": 53.4241,
+      "longitude": -2.3218
     },
     {
       "region": "Manchester",
@@ -27,7 +42,9 @@
       "postcodes": ["M28"],
       "town": "Worsley",
       "hk_concentration": "medium",
-      "notes": "Traditional residential, popular with middle-class families"
+      "notes": "Traditional residential, popular with middle-class families",
+      "latitude": 53.5089,
+      "longitude": -2.3862
     },
     {
       "region": "Manchester",
@@ -36,7 +53,9 @@
       "postcodes": ["M45"],
       "town": "Whitefield",
       "hk_concentration": "medium",
-      "notes": "Popular choice north of Manchester"
+      "notes": "Popular choice north of Manchester",
+      "latitude": 53.5489,
+      "longitude": -2.2964
     },
     {
       "region": "Manchester",
@@ -45,25 +64,64 @@
       "postcodes": ["M20"],
       "town": "Didsbury",
       "hk_concentration": "medium",
-      "notes": "Popular with HK professionals, vibrant village atmosphere"
+      "notes": "Popular with HK professionals, vibrant village atmosphere",
+      "latitude": 53.4156,
+      "longitude": -2.2278
     },
     {
       "region": "London",
       "county": "GREATER LONDON",
       "district": "SUTTON",
-      "postcodes": ["SM1", "SM2", "SM3"],
+      "postcodes": ["SM1"],
       "town": "Sutton",
       "hk_concentration": "high",
-      "notes": "Hottest HK settlement, famous for Grammar Schools"
+      "notes": "Hottest HK settlement, famous for Grammar Schools",
+      "latitude": 51.3618,
+      "longitude": -0.1945
+    },
+    {
+      "region": "London",
+      "county": "GREATER LONDON",
+      "district": "SUTTON",
+      "postcodes": ["SM2"],
+      "town": "Cheam",
+      "hk_concentration": "high",
+      "notes": "Hottest HK settlement, famous for Grammar Schools",
+      "latitude": 51.3544,
+      "longitude": -0.2150
+    },
+    {
+      "region": "London",
+      "county": "GREATER LONDON",
+      "district": "SUTTON",
+      "postcodes": ["SM3"],
+      "town": "Cheam North",
+      "hk_concentration": "high",
+      "notes": "Hottest HK settlement, famous for Grammar Schools",
+      "latitude": 51.3679,
+      "longitude": -0.2050
     },
     {
       "region": "London",
       "county": "GREATER LONDON",
       "district": "KINGSTON UPON THAMES",
-      "postcodes": ["KT1", "KT2"],
+      "postcodes": ["KT1"],
       "town": "Kingston upon Thames",
       "hk_concentration": "high",
-      "notes": "Elegant environment, good safety, traditional HK parent choice"
+      "notes": "Elegant environment, good safety, traditional HK parent choice",
+      "latitude": 51.4085,
+      "longitude": -0.3064
+    },
+    {
+      "region": "London",
+      "county": "GREATER LONDON",
+      "district": "KINGSTON UPON THAMES",
+      "postcodes": ["KT2"],
+      "town": "Kingston upon Thames North",
+      "hk_concentration": "high",
+      "notes": "Elegant environment, good safety, traditional HK parent choice",
+      "latitude": 51.4200,
+      "longitude": -0.2950
     },
     {
       "region": "London",
@@ -72,7 +130,9 @@
       "postcodes": ["CR0"],
       "town": "Croydon",
       "hk_concentration": "high",
-      "notes": "Good transport links, lower cost than central London"
+      "notes": "Good transport links, lower cost than central London",
+      "latitude": 51.3762,
+      "longitude": -0.0982
     },
     {
       "region": "London",
@@ -81,43 +141,108 @@
       "postcodes": ["NW9"],
       "town": "Colindale",
       "hk_concentration": "medium",
-      "notes": "New apartments, popular with young HK couples"
+      "notes": "New apartments, popular with young HK couples",
+      "latitude": 51.5940,
+      "longitude": -0.2520
     },
     {
       "region": "Warrington",
       "county": "CHESHIRE",
       "district": "WARRINGTON",
-      "postcodes": ["WA4", "WA5"],
-      "town": "Great Sankey / Stockton Heath",
+      "postcodes": ["WA4"],
+      "town": "Stockton Heath",
       "hk_concentration": "medium",
-      "notes": "Between Manchester and Liverpool, quieter and cheaper"
+      "notes": "Between Manchester and Liverpool, quieter and cheaper",
+      "latitude": 53.3614,
+      "longitude": -2.5814
+    },
+    {
+      "region": "Warrington",
+      "county": "CHESHIRE",
+      "district": "WARRINGTON",
+      "postcodes": ["WA5"],
+      "town": "Great Sankey",
+      "hk_concentration": "medium",
+      "notes": "Between Manchester and Liverpool, quieter and cheaper",
+      "latitude": 53.3897,
+      "longitude": -2.6289
     },
     {
       "region": "Reading",
       "county": "BERKSHIRE",
       "district": "READING",
-      "postcodes": ["RG1", "RG2", "RG6"],
+      "postcodes": ["RG1"],
       "town": "Reading",
       "hk_concentration": "medium",
-      "notes": "London commuter belt, major tech employers"
+      "notes": "London commuter belt, major tech employers",
+      "latitude": 51.4542,
+      "longitude": -0.9781
+    },
+    {
+      "region": "Reading",
+      "county": "BERKSHIRE",
+      "district": "READING",
+      "postcodes": ["RG2"],
+      "town": "Reading South",
+      "hk_concentration": "medium",
+      "notes": "London commuter belt, major tech employers",
+      "latitude": 51.4280,
+      "longitude": -0.9734
+    },
+    {
+      "region": "Reading",
+      "county": "BERKSHIRE",
+      "district": "READING",
+      "postcodes": ["RG6"],
+      "town": "Reading East",
+      "hk_concentration": "medium",
+      "notes": "London commuter belt, major tech employers",
+      "latitude": 51.4447,
+      "longitude": -0.9304
     },
     {
       "region": "Birmingham",
       "county": "WEST MIDLANDS",
       "district": "SOLIHULL",
-      "postcodes": ["B90", "B91"],
+      "postcodes": ["B90"],
       "town": "Solihull",
       "hk_concentration": "high",
-      "notes": "Premium residential area, excellent schools"
+      "notes": "Premium residential area, excellent schools",
+      "latitude": 52.3837,
+      "longitude": -1.7800
+    },
+    {
+      "region": "Birmingham",
+      "county": "WEST MIDLANDS",
+      "district": "SOLIHULL",
+      "postcodes": ["B91"],
+      "town": "Solihull North",
+      "hk_concentration": "high",
+      "notes": "Premium residential area, excellent schools",
+      "latitude": 52.4124,
+      "longitude": -1.7784
     },
     {
       "region": "Birmingham",
       "county": "WEST MIDLANDS",
       "district": "BIRMINGHAM",
-      "postcodes": ["B73", "B74"],
+      "postcodes": ["B73"],
       "town": "Sutton Coldfield",
       "hk_concentration": "medium",
-      "notes": "Quality education and living environment"
+      "notes": "Quality education and living environment",
+      "latitude": 52.5627,
+      "longitude": -1.8219
+    },
+    {
+      "region": "Birmingham",
+      "county": "WEST MIDLANDS",
+      "district": "BIRMINGHAM",
+      "postcodes": ["B74"],
+      "town": "Sutton Coldfield West",
+      "hk_concentration": "medium",
+      "notes": "Quality education and living environment",
+      "latitude": 52.5814,
+      "longitude": -1.8619
     },
     {
       "region": "Nottingham",
@@ -126,16 +251,31 @@
       "postcodes": ["NG2"],
       "town": "West Bridgford",
       "hk_concentration": "medium",
-      "notes": "Most popular area in Nottingham, high quality of life"
+      "notes": "Most popular area in Nottingham, high quality of life",
+      "latitude": 52.9271,
+      "longitude": -1.1366
     },
     {
       "region": "Bristol",
       "county": "AVON",
       "district": "SOUTH GLOUCESTERSHIRE",
-      "postcodes": ["BS16", "BS34"],
+      "postcodes": ["BS16"],
       "town": "Bristol North",
       "hk_concentration": "medium",
-      "notes": "Attracts professionals, active community"
+      "notes": "Attracts professionals, active community",
+      "latitude": 51.4897,
+      "longitude": -2.5100
+    },
+    {
+      "region": "Bristol",
+      "county": "AVON",
+      "district": "SOUTH GLOUCESTERSHIRE",
+      "postcodes": ["BS34"],
+      "town": "Bristol North",
+      "hk_concentration": "medium",
+      "notes": "Attracts professionals, active community",
+      "latitude": 51.5262,
+      "longitude": -2.5833
     }
   ]
 }

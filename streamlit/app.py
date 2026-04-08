@@ -210,20 +210,39 @@ with tab2:
         st.subheader("HK Community Areas (Folium)")
         m = folium.Map(location=[52.5, -1.5], zoom_start=6)
 
-        if not df_postcode.empty:
-            hk_areas = df_postcode[
-                df_postcode["hk_concentration"].isin(["high", "medium"])
-            ].drop_duplicates("postcode_district")
+        try:
+            from azure.identity import ClientSecretCredential
+            credential = ClientSecretCredential(
+                tenant_id=AZURE_TENANT_ID,
+                client_id=AZURE_CLIENT_ID,
+                client_secret=AZURE_CLIENT_SECRET
+            )
+            blob_client = BlobServiceClient(
+                account_url=f"https://{STORAGE_ACCOUNT}.blob.core.windows.net",
+                credential=credential
+            ).get_blob_client("config", "hk_community_areas.json")
+            config_data = json.loads(blob_client.download_blob().readall())
+            areas = config_data["areas"]
 
-            for _, row in hk_areas.iterrows():
-                color = HK_CONCENTRATION_COLORS.get(row["hk_concentration"], "gray")
+            for area in areas:
+                color = "#FF4B4B" if area["hk_concentration"] == "high" else "#FFA500"
                 folium.CircleMarker(
-                    location=[51.5, -0.1],  # placeholder - replace with postcode centroid
-                    radius=8,
+                    location=[area["latitude"], area["longitude"]],
+                    radius=10,
                     color=color,
                     fill=True,
-                    popup=f"{row['postcode_district']}: {row['hk_concentration']} concentration"
+                    fill_opacity=0.7,
+                    popup=folium.Popup(
+                        f"<b>{area['town']}</b><br>"
+                        f"Postcode: {', '.join(area['postcodes'])}<br>"
+                        f"Concentration: {area['hk_concentration']}<br>"
+                        f"{area['notes']}",
+                        max_width=250
+                    ),
+                    tooltip=f"{area['town']} ({', '.join(area['postcodes'])})"
                 ).add_to(m)
+        except Exception as e:
+            st.warning(f"Could not load HK areas: {e}")
 
         st_folium(m, height=500, use_container_width=True)
 
