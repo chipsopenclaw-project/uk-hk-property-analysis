@@ -53,8 +53,8 @@ def load_parquet_from_adls(container: str, blob_prefix: str) -> pd.DataFrame:
             client_id=AZURE_CLIENT_ID,
             client_secret=AZURE_CLIENT_SECRET
         )
-        account_url = f"https://{STORAGE_ACCOUNT}.dfs.core.windows.net"
-        client = BlobServiceClient(account_url=account_url)
+        account_url = f"https://{STORAGE_ACCOUNT}.blob.core.windows.net"
+        client = BlobServiceClient(account_url=account_url, credential=credential)
         container_client = client.get_container_client(container)
         blobs = [b.name for b in container_client.list_blobs(name_starts_with=blob_prefix)
                  if b.name.endswith(".parquet")]
