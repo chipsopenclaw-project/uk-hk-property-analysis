@@ -35,27 +35,6 @@ resource "azurerm_data_factory_linked_service_data_lake_storage_gen2" "adls" {
   use_managed_identity = true
 }
 
-# ── Linked Service: HTTP (Land Registry) ──────────────────
-resource "azurerm_data_factory_linked_service_web" "land_registry" {
-  name                = "ls_http_land_registry"
-  data_factory_id     = azurerm_data_factory.main.id
-  url                 = "https://prod.publicdata.landregistry.gov.uk.s3-website-eu-west-1.amazonaws.com"
-  authentication_type = "Anonymous"
-}
-
-# ── Dataset: HTTP Source (Land Registry) ──────────────────
-resource "azurerm_data_factory_dataset_http" "land_registry_csv" {
-  name                = "ds_http_land_registry_csv"
-  data_factory_id     = azurerm_data_factory.main.id
-  linked_service_name = azurerm_data_factory_linked_service_web.land_registry.name
-  relative_url        = "@dataset().relative_url"
-  request_method      = "GET"
-
-  parameters = {
-    relative_url = ""
-  }
-}
-
 # ── Dataset: ADLS Bronze Destination ──────────────────────
 resource "azurerm_data_factory_dataset_azure_blob" "bronze_land_registry" {
   name                = "ds_adls_bronze_land_registry"
