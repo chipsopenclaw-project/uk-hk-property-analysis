@@ -11,6 +11,7 @@
             "value": "@pipeline().parameters.years",
             "type": "Expression"
           },
+          "isSequential": true,
           "activities": [
             {
               "name": "CopyYearlyCSV",
@@ -43,7 +44,7 @@
               "typeProperties": {
                 "source": {
                   "type": "HttpSource",
-                  "requestTimeout": "00:30:00"
+                  "requestTimeout": "01:00:00"
                 },
                 "sink": {
                   "type": "AzureBlobFSSink"
