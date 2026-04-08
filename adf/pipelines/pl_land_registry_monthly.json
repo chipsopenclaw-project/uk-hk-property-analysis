@@ -51,7 +51,9 @@
         "dependsOn": [
           {
             "activity": "CopyMonthlyCSV",
-            "dependencyConditions": ["Succeeded"]
+            "dependencyConditions": [
+              "Succeeded"
+            ]
           }
         ],
         "typeProperties": {
@@ -68,10 +70,10 @@
             "file": "abfss://config@stukhkpropdev.dfs.core.windows.net/scripts/bronze_to_silver.py",
             "name": "bronze_to_silver",
             "executorMemory": "4g",
-            "executorCores": 4,
+            "executorCores": 2,
             "numExecutors": 3,
             "driverMemory": "4g",
-            "driverCores": 4
+            "driverCores": 2
           }
         }
       },
@@ -81,7 +83,9 @@
         "dependsOn": [
           {
             "activity": "BronzeToSilver",
-            "dependencyConditions": ["Succeeded"]
+            "dependencyConditions": [
+              "Succeeded"
+            ]
           }
         ],
         "typeProperties": {
@@ -94,7 +98,9 @@
         "dependsOn": [
           {
             "activity": "WaitForBronzeToSilver",
-            "dependencyConditions": ["Succeeded"]
+            "dependencyConditions": [
+              "Succeeded"
+            ]
           }
         ],
         "typeProperties": {
@@ -111,10 +117,10 @@
             "file": "abfss://config@stukhkpropdev.dfs.core.windows.net/scripts/silver_to_gold.py",
             "name": "silver_to_gold",
             "executorMemory": "4g",
-            "executorCores": 4,
+            "executorCores": 2,
             "numExecutors": 3,
             "driverMemory": "4g",
-            "driverCores": 4
+            "driverCores": 2
           }
         }
       }
