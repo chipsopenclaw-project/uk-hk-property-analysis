@@ -32,10 +32,7 @@
                   "referenceName": "ds_adls_bronze_land_registry",
                   "type": "DatasetReference",
                   "parameters": {
-                    "folder": {
-                      "value": "@concat('historical/', item())",
-                      "type": "Expression"
-                    },
+                    "folder": "historical",
                     "filename": {
                       "value": "@concat('pp-', item(), '.csv')",
                       "type": "Expression"
@@ -46,7 +43,7 @@
               "typeProperties": {
                 "source": {
                   "type": "HttpSource",
-                  "requestTimeout": "00:10:00"
+                  "requestTimeout": "00:30:00"
                 },
                 "sink": {
                   "type": "AzureBlobFSSink"
