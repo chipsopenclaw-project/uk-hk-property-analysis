@@ -1,7 +1,7 @@
 {
   "name": "ls_synapse_dev",
   "properties": {
-    "type": "AzureSynapse",
+    "type": "AzureSynapseArtifacts",
     "typeProperties": {
       "endpoint": "https://syn-ukhkprop-dev.dev.azuresynapse.net",
       "authentication": "ManagedServiceIdentity"
