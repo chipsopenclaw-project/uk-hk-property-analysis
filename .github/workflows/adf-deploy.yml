@@ -34,12 +34,11 @@ jobs:
           for file in adf/linked_services/*.json; do
             ls_name=$(basename "$file" .json)
             echo "Deploying linked service: $ls_name"
-            properties=$(cat "$file" | python3 -c "import json,sys; d=json.load(sys.stdin); print(json.dumps(d['properties']))")
             az datafactory linked-service create \
               --factory-name "adf-ukhkprop-dev" \
               --resource-group "rg-ukhkprop-dev" \
               --name "$ls_name" \
-              --properties "$properties"
+              --properties "$(cat $file | python3 -c 'import json,sys; d=json.load(sys.stdin); print(json.dumps(d["properties"]))')"
           done
 
       - name: Deploy ADF Pipelines
