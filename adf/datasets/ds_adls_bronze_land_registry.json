@@ -1,0 +1,34 @@
+{
+  "name": "ds_adls_bronze_land_registry",
+  "properties": {
+    "type": "Binary",
+    "linkedServiceName": {
+      "referenceName": "ls_adls_dev",
+      "type": "LinkedServiceReference"
+    },
+    "parameters": {
+      "folder": {
+        "type": "String",
+        "defaultValue": ""
+      },
+      "filename": {
+        "type": "String",
+        "defaultValue": ""
+      }
+    },
+    "typeProperties": {
+      "location": {
+        "type": "AzureBlobFSLocation",
+        "fileSystem": "bronze",
+        "folderPath": {
+          "value": "@concat('land-registry/', dataset().folder)",
+          "type": "Expression"
+        },
+        "fileName": {
+          "value": "@dataset().filename",
+          "type": "Expression"
+        }
+      }
+    }
+  }
+}

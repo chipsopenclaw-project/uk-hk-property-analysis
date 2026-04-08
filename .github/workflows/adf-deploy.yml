@@ -7,6 +7,7 @@ on:
     paths:
       - 'adf/pipelines/**'
       - 'adf/linked_services/**'
+      - 'adf/datasets/**'
   workflow_dispatch:
 
 jobs:
@@ -31,6 +32,9 @@ jobs:
 
       - name: Deploy ADF Linked Services
         run: python3 scripts/deploy_adf_linked_services.py
+
+      - name: Deploy ADF Datasets
+        run: python3 scripts/deploy_adf_datasets.py
 
       - name: Deploy ADF Pipelines
         run: |
